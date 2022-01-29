@@ -147,6 +147,7 @@ router.post("/login", async (req, res) => {
               surname: friendFinder[0].surname,
               photo: friendFinder[0].photo,
               id: friendFinder[0].id,
+              login_time: friendFinder[0].login_time
             },
           },
         };
@@ -309,6 +310,8 @@ router.post("/checksession/:id", async (req, res) => {
             surname: friendFinder[0].surname,
             photo: friendFinder[0].photo,
             id: friendFinder[0].id,
+            login_time: friendFinder[0].login_time
+
           },
         },
       };
