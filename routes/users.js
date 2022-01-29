@@ -254,6 +254,7 @@ router.post("/checksession/:id", async (req, res) => {
         photo: friend.photo,
         id: friend.id,
         login_time: friend.login_time,
+        bio: friend.bio
       });
     });
 
@@ -270,6 +271,7 @@ router.post("/checksession/:id", async (req, res) => {
         surname: friend.surname,
         photo: friend.photo,
         id: friend.id,
+        bio: friend.bio
       });
     });
 
@@ -286,6 +288,7 @@ router.post("/checksession/:id", async (req, res) => {
         surname: friend.surname,
         photo: friend.photo,
         id: friend.id,
+        bio: friend.bio
       });
     });
 
@@ -311,6 +314,7 @@ router.post("/checksession/:id", async (req, res) => {
             photo: friendFinder[0].photo,
             id: friendFinder[0].id,
             login_time: friendFinder[0].login_time
+
 
           },
         },
