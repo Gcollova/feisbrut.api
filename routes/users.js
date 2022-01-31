@@ -5,6 +5,7 @@ const router = express.Router();
 const config = require("../config");
 const { response } = require("express");
 const { Z_ASCII } = require("zlib");
+const { resourceLimits } = require("worker_threads");
 
 const dbURI = `mongodb+srv://Canstopme0:${config.uriKey}@fesibrut-api.dkfxl.mongodb.net/users?retryWrites=true&w=majority`;
 const mongoClient = new MongoClient(dbURI);
@@ -607,28 +608,34 @@ router.patch("/users/:id", async (req, res) => {
   let data = [];
   const cursor = usersCollection.find({});
   await cursor.forEach((user) => data.push(user));
-  let result = data.filter(
-    (user) =>
-    user._id.toString() === newReq._id 
-    
-    );
-    
-    
 
-  if(result.length > 0){
-    newObject ={
-    name:newReq.name,
-    surname:newReq.surname,
-    email:newReq.email,
-    photo:newReq.photo,
-    bio:newReq.bio
-  }
-  console.log(newObject)
-  const update = { $set: newObject };
-  const filter = { _id :ObjectId(newReq._id)};
-  const ris = await usersCollection.updateOne(filter, update);
-  res.send([{ response_: `user id:${userId} updated` }]);
- } else {res.send({response:"accesso non autorizzato"})}
+    setTimeout(() => {
+      let  result =  data.filter(
+        (user) =>
+       user._id.toString() === newReq._id 
+       
+      );
+       
+       
+       
+   
+     if(result.length > 0){
+       newObject ={
+       name:newReq.name,
+       surname:newReq.surname,
+       email:newReq.email,
+       photo:newReq.photo,
+       bio:newReq.bio
+     }
+     const update = { $set: newObject };
+     const filter = { _id :ObjectId(newReq._id)};
+     const ris = await usersCollection.updateOne(filter, update);
+     res.send([{ response_: `user id:${userId} updated` }]);
+    } else {res.send({response:"accesso non autorizzato"})}
+    }, 500);
+
+
+  
   
 });
 /* -----------------------------------------------------/USER SINGLE PATCH---------------------------------------------------------------------- */
