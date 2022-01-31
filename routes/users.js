@@ -609,7 +609,7 @@ router.patch("/users/:id", async (req, res) => {
   const cursor = usersCollection.find({});
   await cursor.forEach((user) => data.push(user));
 
-    setTimeout(() => {
+    
       let  result =  data.filter(
         (user) =>
        user._id.toString() === newReq._id 
@@ -632,7 +632,7 @@ router.patch("/users/:id", async (req, res) => {
      const ris = await usersCollection.updateOne(filter, update);
      res.send([{ response_: `user id:${userId} updated` }]);
     } else {res.send({response:"accesso non autorizzato"})}
-    }, 500);
+    
 
 
   
