@@ -615,7 +615,7 @@ router.patch("/users/:id", async (req, res) => {
     
     
 
-  if(result){
+  if(result.length > 0){
     newObject ={
     name:newReq.name,
     surname:newReq.surname,
@@ -628,7 +628,7 @@ router.patch("/users/:id", async (req, res) => {
   const filter = { _id :ObjectId(newReq._id)};
   const ris = await usersCollection.updateOne(filter, update);
   res.send([{ response_: `user id:${userId} updated` }]);
-} else {res.send({response:"accesso non autorizzato"})}
+ } else {res.send({response:"accesso non autorizzato"})}
   
 });
 /* -----------------------------------------------------/USER SINGLE PATCH---------------------------------------------------------------------- */
